@@ -3,6 +3,8 @@ import Home from './components/Home';
 import Quiz from './components/Quiz';
 import './App.css'; // Import your CSS file for styling
 import AdjectiveDeclensionQuiz from './components/AdjectiveDeclensionQuiz';
+import HighlightTable from './components/HighlightTable';
+import { Carousel } from 'bootstrap';
 
 function App() {
   const [adjective, setAdjective] = useState('schön');
@@ -23,7 +25,7 @@ function App() {
         <section className="quiz-section">
           <Quiz />
           <AdjectiveDeclensionQuiz adjective={adjective} />
-        </section>
+          </section>
       </main>
     </div>
   );
