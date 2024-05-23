@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Home from './components/Home';
 import Quiz from './components/Quiz';
 import './App.css'; // Import your CSS file for styling
+import AdjectiveDeclensionQuiz from './components/AdjectiveDeclensionQuiz';
 
 function App() {
   const [adjective, setAdjective] = useState('schön');
@@ -21,6 +22,7 @@ function App() {
         </section>
         <section className="quiz-section">
           <Quiz />
+          <AdjectiveDeclensionQuiz adjective={adjective} />
         </section>
       </main>
     </div>
