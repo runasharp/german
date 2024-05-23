@@ -50,8 +50,6 @@ const Home = () => {
         <StrongDeclension adjective="schön" />
       </section>
       <section>
-        <h2>Квиз на склонение прилагательных</h2>
-        <AdjectiveDeclensionQuiz />
       </section>
       <section>
         <h2>Объяснение склонений прилагательных</h2>
