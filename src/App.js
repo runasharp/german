@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Home from './components/Home';
+import Quiz from './components/Quiz';
+import './App.css'; // Import your CSS file for styling
 
 function App() {
+  const [adjective, setAdjective] = useState('schön');
+
+  const handleAdjectiveChange = (event) => {
+    setAdjective(event.target.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>Склонения прилагательных</h1>
       </header>
+      <main className="main-content">
+        <section className="home-section">
+          <Home adjective={adjective} handleAdjectiveChange={handleAdjectiveChange} />
+        </section>
+        <section className="quiz-section">
+          <Quiz />
+        </section>
+      </main>
     </div>
   );
 }
