@@ -1,0 +1,28 @@
+.toggle-container {
+    margin-bottom: 10px;
+  }
+  
+  .toggle-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .toggle-icon {
+    transition: transform 0.2s;
+    margin-right: 5px;
+    color: black;
+  }
+  
+  .toggle-icon.open {
+    transform: rotate(90deg);
+  }
+  
+  .toggle-label {
+    font-weight: bold;
+  }
+  
+  .toggle-content {
+    padding-left: 20px;
+    margin-top: 5px;
+  }
