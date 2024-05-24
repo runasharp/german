@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { endings, definiteArticles, indefiniteArticles } from './quiz/rules';
-import { adjectives } from './quiz/words';
+import { adjectives, germanWords } from './quiz/words';
 
 const declensions = ['слабое скл.', 'смешанное скл.', 'сильное скл.'];
 const cases = ['Nominativ', 'Akkusativ', 'Dativ', 'Genitiv'];
@@ -10,6 +10,13 @@ const getRandomElement = (array) => array[Math.floor(Math.random() * array.lengt
 
 const generateIncompleteTable = (declension, adjective) => {
   const incompleteTable = {};
+  const nouns = {
+    m: getRandomElement(germanWords.filter(word => word.gender === 'm')).word,
+    n: getRandomElement(germanWords.filter(word => word.gender === 'n')).word,
+    f: getRandomElement(germanWords.filter(word => word.gender === 'f')).word,
+    plural: getRandomElement(germanWords).plural
+  };
+
   cases.forEach((caseType) => {
     incompleteTable[caseType] = {};
     genders.forEach((gender) => {
@@ -22,7 +29,8 @@ const generateIncompleteTable = (declension, adjective) => {
       incompleteTable[caseType][gender] = {
         correct: `${adjective}${endings[declension][caseType][gender]}`,
         userInput: '',
-        article
+        article,
+        noun: nouns[gender]
       };
     });
   });
@@ -65,7 +73,7 @@ const AdjectiveDeclensionQuiz = () => {
 
     cases.forEach((caseType) => {
       genders.forEach((gender) => {
-        if (incompleteTable[caseType][gender].userInput === incompleteTable[caseType][gender].correct.slice(currentAdjective.length)) {
+        if (incompleteTable[caseType][gender].userInput === incompleteTable[caseType][gender].correct) {
           correctCount++;
         }
         totalCount++;
@@ -103,14 +111,23 @@ const AdjectiveDeclensionQuiz = () => {
                   <td>{caseType}</td>
                   {genders.map((gender) => (
                     <td key={gender}>
-                    {incompleteTable[caseType][gender].article} {currentAdjective}
-                    <input
+                      {incompleteTable[caseType][gender].article} {currentAdjective}
+                      <input
                         type="text"
                         value={incompleteTable[caseType][gender].userInput}
                         onChange={(e) => handleInputChange(caseType, gender, e.target.value)}
                         placeholder={showHints ? endings[currentDeclension][caseType][gender] : ''}
-                        style={{ width: '30px', color: incompleteTable[caseType][gender].userInput ? 'black' : 'grey' }}
-                    />
+                        style={{
+                          border: 'none',
+                          borderBottom: '1px solid black',
+                          width: '20px',
+                          color: incompleteTable[caseType][gender].userInput ? 'black' : 'grey',
+                          margin: '0',
+                          padding: '0',
+                          fontSize: 'inherit',
+                          outline: 'none'
+                        }}
+                      /> {incompleteTable[caseType][gender].noun}
                     </td>
                   ))}
                 </tr>
