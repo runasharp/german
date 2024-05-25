@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { endings, definiteArticles, indefiniteArticles } from './quiz/rules';
 import { adjectives } from './quiz/words';
+import { getRandomElement, handleInputChange, checkAnswers } from './quiz/utils';
 
 const declensions = ['слабое скл.', 'смешанное скл.', 'сильное скл.'];
 const cases = ['Nominativ', 'Akkusativ', 'Dativ', 'Genitiv'];
 const genders = ['m', 'n', 'f', 'plural'];
-
-const getRandomElement = (array) => array[Math.floor(Math.random() * array.length)];
 
 const generateIncompleteTable = (declension, adjective) => {
   const incompleteTable = {};
@@ -23,7 +22,8 @@ const generateIncompleteTable = (declension, adjective) => {
         correct: `${adjective}${endings[declension][caseType][gender]}`,
         userInput: '',
         article,
-        isCorrect: null
+        isCorrect: null,
+        isChecked: false
       };
     });
   });
@@ -49,46 +49,6 @@ const AdjectiveDeclensionQuiz = () => {
     setShowResults(false); // Reset results visibility
   };
 
-  const handleInputChange = (caseType, gender, value) => {
-    setIncompleteTable({
-      ...incompleteTable,
-      [caseType]: {
-        ...incompleteTable[caseType],
-        [gender]: {
-          ...incompleteTable[caseType][gender],
-          userInput: value
-        }
-      }
-    });
-  };
-
-  const checkAnswers = () => {
-    let correctCount = 0;
-    let totalCount = 0;
-  
-    cases.forEach((caseType) => {
-      genders.forEach((gender) => {
-        const userEnding = incompleteTable[caseType][gender].userInput;
-        const correctEnding = incompleteTable[caseType][gender].correct.slice(currentAdjective.length);
-        const isCorrect = userEnding === correctEnding;
-        if (isCorrect) {
-          correctCount++;
-        }
-        incompleteTable[caseType][gender].isCorrect = isCorrect;
-        incompleteTable[caseType][gender].isChecked = true; // Mark as checked
-        totalCount++;
-      });
-    });
-  
-    setIncompleteTable({ ...incompleteTable }); // Update the state to reflect changes
-    setResult(`${correctCount} из ${totalCount} правильных ответов.`);
-    setShowResults(true); // Show results after checking answers
-  };
-
-  const toggleHints = () => {
-    setShowHints(!showHints);
-  };
-
   return (
     <div>
       <button onClick={startQuiz}>Новый вопрос с табличкой склонений</button>
@@ -96,7 +56,9 @@ const AdjectiveDeclensionQuiz = () => {
         <div>
           <h3>Заполните таблицу склонений прилагательных ({currentDeclension})</h3>
           <p>Прилагательное: <b>{currentAdjective}</b></p>
-          <button onClick={toggleHints}>{showHints ? 'Скрыть подсказки' : 'Показать подсказки'}</button>
+          <button onClick={() => setShowHints(!showHints)}>
+            {showHints ? 'Скрыть подсказки' : 'Показать подсказки'}
+          </button>
           <table>
             <thead>
               <tr>
@@ -117,7 +79,7 @@ const AdjectiveDeclensionQuiz = () => {
                       <input
                         type="text"
                         value={incompleteTable[caseType][gender].userInput}
-                        onChange={(e) => handleInputChange(caseType, gender, e.target.value)}
+                        onChange={(e) => handleInputChange(caseType, gender, e.target.value, setIncompleteTable, incompleteTable)}
                         placeholder={showHints ? endings[currentDeclension][caseType][gender] : ''}
                         style={{
                           width: '20px',
@@ -140,7 +102,9 @@ const AdjectiveDeclensionQuiz = () => {
               ))}
             </tbody>
           </table>
-          <button onClick={checkAnswers}>Проверить ответы</button>
+          <button onClick={() => setIncompleteTable(checkAnswers(incompleteTable, setResult, setShowResults))}>
+            Проверить ответы
+          </button>
           {result && <p>{result}</p>}
         </div>
       )}

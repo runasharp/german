@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { medicalTexts } from './quiz/medicalTexts';
-
-const getRandomElement = (array) => array[Math.floor(Math.random() * array.length)];
+import { getRandomElement, handleInputChange, checkAnswers } from './quiz/utils';
 
 const generateQuizTable = () => {
   const quiz = getRandomElement(medicalTexts);
@@ -29,34 +28,10 @@ const MedicalTextQuiz = () => {
     setShowHints(false); // Reset hints visibility
   };
 
-  const handleInputChange = (index, value) => {
-    const updatedTable = quizTable.map((item, i) => i === index ? { ...item, userInput: value } : item);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const updatedTable = checkAnswers(quizTable, setResult, setShowResults);
     setQuizTable(updatedTable);
-  };
-
-  const checkAnswers = () => {
-    let correctCount = 0;
-    let totalCount = 0;
-
-    const updatedTable = quizTable.map((item) => {
-      if (item.correct !== null) {
-        const isCorrect = item.userInput === item.correct;
-        if (isCorrect) {
-          correctCount++;
-        }
-        totalCount++;
-        return { ...item, isCorrect, isChecked: true };
-      }
-      return item;
-    });
-
-    setQuizTable(updatedTable);
-    setResult(`${correctCount} aus ${totalCount} richtigen Antworten.`);
-    setShowResults(true); // Show results after checking answers
-  };
-
-  const toggleHints = () => {
-    setShowHints(!showHints);
   };
 
   return (
@@ -72,7 +47,7 @@ const MedicalTextQuiz = () => {
                   <input
                     type="text"
                     value={item.userInput}
-                    onChange={(e) => handleInputChange(index, e.target.value)}
+                    onChange={(e) => handleInputChange(index, e.target.value, setQuizTable, quizTable)}
                     placeholder={showHints ? item.correct : ''}
                     style={{
                       width: '20px',
@@ -97,9 +72,11 @@ const MedicalTextQuiz = () => {
           ))}
         </div>
         <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-          <button onClick={checkAnswers}>Проверить ответы</button>
+          <button onClick={handleSubmit}>Проверить ответы</button>
           <button onClick={startQuiz}>Следующий вопрос</button>
-          <button onClick={toggleHints}>{showHints ? 'Скрыть подсказки' : 'Показать подсказки'}</button>
+          <button onClick={() => setShowHints(!showHints)}>
+            {showHints ? 'Скрыть подсказки' : 'Показать подсказки'}
+          </button>
         </div>
         {result && <p>{result}</p>}
       </div>
