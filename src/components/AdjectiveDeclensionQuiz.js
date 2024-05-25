@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { endings, definiteArticles, indefiniteArticles } from './quiz/rules';
-import { adjectives, germanWords } from './quiz/words';
+import { adjectives } from './quiz/words';
 
 const declensions = ['слабое скл.', 'смешанное скл.', 'сильное скл.'];
 const cases = ['Nominativ', 'Akkusativ', 'Dativ', 'Genitiv'];
@@ -10,13 +10,6 @@ const getRandomElement = (array) => array[Math.floor(Math.random() * array.lengt
 
 const generateIncompleteTable = (declension, adjective) => {
   const incompleteTable = {};
-  const nouns = {
-    m: getRandomElement(germanWords.filter(word => word.gender === 'm')).word,
-    n: getRandomElement(germanWords.filter(word => word.gender === 'n')).word,
-    f: getRandomElement(germanWords.filter(word => word.gender === 'f')).word,
-    plural: getRandomElement(germanWords).plural
-  };
-
   cases.forEach((caseType) => {
     incompleteTable[caseType] = {};
     genders.forEach((gender) => {
@@ -30,7 +23,7 @@ const generateIncompleteTable = (declension, adjective) => {
         correct: `${adjective}${endings[declension][caseType][gender]}`,
         userInput: '',
         article,
-        noun: nouns[gender]
+        isCorrect: null
       };
     });
   });
@@ -43,6 +36,7 @@ const AdjectiveDeclensionQuiz = () => {
   const [incompleteTable, setIncompleteTable] = useState({});
   const [result, setResult] = useState(null);
   const [showHints, setShowHints] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   const startQuiz = () => {
     const declension = getRandomElement(declensions);
@@ -52,6 +46,7 @@ const AdjectiveDeclensionQuiz = () => {
     setIncompleteTable(generateIncompleteTable(declension, adjective));
     setResult(null);
     setShowHints(false); // Reset hints visibility
+    setShowResults(false); // Reset results visibility
   };
 
   const handleInputChange = (caseType, gender, value) => {
@@ -73,14 +68,19 @@ const AdjectiveDeclensionQuiz = () => {
 
     cases.forEach((caseType) => {
       genders.forEach((gender) => {
-        if (incompleteTable[caseType][gender].userInput === incompleteTable[caseType][gender].correct) {
+        const userEnding = incompleteTable[caseType][gender].userInput;
+        const correctEnding = incompleteTable[caseType][gender].correct.slice(currentAdjective.length);
+        const isCorrect = userEnding === correctEnding;
+        if (isCorrect) {
           correctCount++;
         }
+        incompleteTable[caseType][gender].isCorrect = isCorrect;
         totalCount++;
       });
     });
 
     setResult(`${correctCount} из ${totalCount} правильных ответов.`);
+    setShowResults(true); // Show results after checking answers
   };
 
   const toggleHints = () => {
@@ -118,16 +118,21 @@ const AdjectiveDeclensionQuiz = () => {
                         onChange={(e) => handleInputChange(caseType, gender, e.target.value)}
                         placeholder={showHints ? endings[currentDeclension][caseType][gender] : ''}
                         style={{
+                          width: '30px',
+                          color: incompleteTable[caseType][gender].userInput ? 'black' : 'grey',
                           border: 'none',
                           borderBottom: '1px solid black',
-                          width: '20px',
-                          color: incompleteTable[caseType][gender].userInput ? 'black' : 'grey',
                           margin: '0',
                           padding: '0',
                           fontSize: 'inherit',
-                          outline: 'none'
+                          outline: 'none',
+                          color: showResults
+                            ? incompleteTable[caseType][gender].isCorrect
+                              ? 'green'
+                              : 'red'
+                            : 'black'
                         }}
-                      /> {incompleteTable[caseType][gender].noun}
+                      />
                     </td>
                   ))}
                 </tr>
