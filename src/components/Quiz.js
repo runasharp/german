@@ -95,7 +95,7 @@ const Quiz = () => {
 
   return (
     <div>
-      <button onClick={generateQuestion}>Сгенерировать вопрос</button>
+      <button onClick={generateQuestion}>Новый вопрос с печатью целого предложения</button>
       {currentWord.word && (
         <div>
           <h3>Заполните правильную форму прилагательного</h3>

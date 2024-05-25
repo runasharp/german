@@ -5,6 +5,7 @@ import './App.css'; // Import your CSS file for styling
 import AdjectiveDeclensionQuiz from './components/AdjectiveDeclensionQuiz';
 import HighlightTable from './components/HighlightTable';
 import { Carousel } from 'bootstrap';
+import MedicalTextQuiz from './components/MedicalTextQuiz';
 
 function App() {
   const [adjective, setAdjective] = useState('schön');
@@ -25,6 +26,7 @@ function App() {
         <section className="quiz-section">
           <Quiz />
           <AdjectiveDeclensionQuiz adjective={adjective} />
+          <MedicalTextQuiz />
           </section>
       </main>
     </div>

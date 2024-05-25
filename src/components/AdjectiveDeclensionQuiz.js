@@ -91,7 +91,7 @@ const AdjectiveDeclensionQuiz = () => {
 
   return (
     <div>
-      <button onClick={startQuiz}>Начать квиз</button>
+      <button onClick={startQuiz}>Новый вопрос с табличкой склонений</button>
       {currentDeclension && currentAdjective && (
         <div>
           <h3>Заполните таблицу склонений прилагательных ({currentDeclension})</h3>
