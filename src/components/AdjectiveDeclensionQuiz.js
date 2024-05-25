@@ -65,7 +65,7 @@ const AdjectiveDeclensionQuiz = () => {
   const checkAnswers = () => {
     let correctCount = 0;
     let totalCount = 0;
-
+  
     cases.forEach((caseType) => {
       genders.forEach((gender) => {
         const userEnding = incompleteTable[caseType][gender].userInput;
@@ -75,10 +75,12 @@ const AdjectiveDeclensionQuiz = () => {
           correctCount++;
         }
         incompleteTable[caseType][gender].isCorrect = isCorrect;
+        incompleteTable[caseType][gender].isChecked = true; // Mark as checked
         totalCount++;
       });
     });
-
+  
+    setIncompleteTable({ ...incompleteTable }); // Update the state to reflect changes
     setResult(`${correctCount} из ${totalCount} правильных ответов.`);
     setShowResults(true); // Show results after checking answers
   };
@@ -118,19 +120,18 @@ const AdjectiveDeclensionQuiz = () => {
                         onChange={(e) => handleInputChange(caseType, gender, e.target.value)}
                         placeholder={showHints ? endings[currentDeclension][caseType][gender] : ''}
                         style={{
-                          width: '30px',
-                          color: incompleteTable[caseType][gender].userInput ? 'black' : 'grey',
+                          width: '20px',
+                          color: incompleteTable[caseType][gender].userInput === '' ? 'grey' : (
+                            showResults && incompleteTable[caseType][gender].isChecked
+                              ? (incompleteTable[caseType][gender].isCorrect ? 'green' : 'red')
+                              : 'black'
+                          ),
                           border: 'none',
                           borderBottom: '1px solid black',
                           margin: '0',
                           padding: '0',
                           fontSize: 'inherit',
-                          outline: 'none',
-                          color: showResults
-                            ? incompleteTable[caseType][gender].isCorrect
-                              ? 'green'
-                              : 'red'
-                            : 'black'
+                          outline: 'none'
                         }}
                       />
                     </td>
