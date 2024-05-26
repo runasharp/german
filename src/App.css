@@ -53,10 +53,11 @@ header h1 {
 
 .main-content {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start; /* Align items to the start (top) of the container */
+  align-items: center; /* Center items horizontally */
   flex-direction: column;
   min-height: 80vh;
+  padding-top: 20px; /* Optional: add some padding to the top */
 }
 
 button {
