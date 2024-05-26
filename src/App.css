@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  background-color: #1f1f1f;
+  background-color: #1c3040;
   padding: 20px 0;
   margin-bottom: 20px;
 }
@@ -21,6 +21,12 @@ header {
 header nav {
   display: flex;
   justify-content: center;
+}
+
+header h1 {
+  color: #f5f5f5; /* Light text color for header */
+  margin: 0;
+  padding: 0 20px;
 }
 
 .nav-links {
@@ -35,14 +41,14 @@ header nav {
 }
 
 .nav-links a {
-  color: #1f1f1f; /* Dark grey for better readability */
+  color: #ffffff; /* Light blue color for links */
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s;
 }
 
 .nav-links a:hover {
-  color: #333; /* Slightly darker grey */
+  color: hsl(208, 72%, 80%); /* Slightly darker blue on hover */
 }
 
 .main-content {
@@ -56,8 +62,8 @@ header nav {
 button {
   margin: 10px;
   padding: 10px 20px;
-  background-color: #1f1f1f; /* Dark grey button */
-  color: #f5f5f5; /* Light grey text */
+  background-color: #1c3040; /* Light blue button background */
+  color: #ffffff; /* Dark text color */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -66,14 +72,14 @@ button {
 }
 
 button:hover {
-  background-color: #333; /* Slightly darker grey */
+  background-color: #325776; /* Slightly darker blue on hover */
   transform: scale(1.05);
 }
 
 input {
   color: #121212; /* Dark text color */
   background-color: #f5f5f5; /* Light grey background */
-  border: 1px solid #1f1f1f; /* Dark grey border */
+  border: 1px solid #90caf9; /* Light blue border */
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
@@ -90,7 +96,7 @@ input {
   height: 30px;
   padding: 10px;
   margin: 10px;
-  border: 1px solid #1f1f1f; /* Dark grey border */
+  border: 1px solid #90caf9; /* Light blue border */
   border-radius: 4px;
   background-color: #f5f5f5; /* Light grey background */
   color: #121212; /* Dark text color */
@@ -103,16 +109,16 @@ input {
   overflow-y: scroll;
   padding: 0;
   list-style-type: none;
-  border: 1px solid #1f1f1f; /* Dark grey border */
+  border: 1px solid #90caf9; /* Light blue border */
 }
 
 .typing-quiz .sentence-overview li {
   cursor: pointer;
   padding: 5px;
-  color: #1f1f1f; /* Dark grey text */
+  color: #121212; /* Dark text color */
   background-color: #f5f5f5; /* Light grey background */
 }
 
 .typing-quiz .sentence-overview li:hover {
-  background-color: #e0e0e0; /* Slightly darker grey */
+  background-color: #e0e0e0; /* Slightly darker grey on hover */
 }
