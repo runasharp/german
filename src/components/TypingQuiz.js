@@ -101,11 +101,12 @@ const TypingQuiz = () => {
     });
   };
 
-  return (
-    <div className="typing-quiz" onClick={() => inputRef.current.focus()}>
-      <div>
-        <h2>Выбрать предложение:</h2>
-        <ul style={{ maxHeight: '100px', overflowY: 'scroll', padding: '0', listStyleType: 'none', border: '1px solid #ccc' }}>
+return (
+  <div className="typing-quiz" onClick={() => inputRef.current.focus()}>
+    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+      <h2>Выбрать предложение:</h2>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <ul style={{ maxHeight: '100px', overflowY: 'scroll', padding: '0', listStyleType: 'none', border: '1px solid #ccc', width: '100%' }}>
           {sentences.map((sentence, index) => (
             <li
               key={index}
@@ -122,17 +123,19 @@ const TypingQuiz = () => {
           ))}
         </ul>
       </div>
-      <div className="text-container">{getStyledText()}</div>
-      <input
-        ref={inputRef}
-        type="text"
-        value={userInput}
-        onChange={handleChange}
-        className="hidden-input"
-        autoFocus
-      />
+      <div className="text-container" style={{ width: '100%' }}>{getStyledText()}</div>
     </div>
-  );
+    <input
+      ref={inputRef}
+      type="text"
+      value={userInput}
+      onChange={handleChange}
+      className="hidden-input"
+      autoFocus
+      style={{ maxWidth: '800px', width: '100%', margin: '0 auto' }}
+    />
+  </div>
+);
 };
 
 export default TypingQuiz;
