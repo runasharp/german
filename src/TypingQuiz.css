@@ -1,0 +1,19 @@
+.typing-quiz {
+    text-align: center;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .text-container {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+  }
+  
+  .typing-input {
+    width: 80%;
+    padding: 10px;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }

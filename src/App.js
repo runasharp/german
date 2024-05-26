@@ -6,6 +6,7 @@ import AdjectiveDeclensionQuiz from './components/AdjectiveDeclensionQuiz';
 import HighlightTable from './components/HighlightTable';
 import { Carousel } from 'bootstrap';
 import MedicalTextQuiz from './components/MedicalTextQuiz';
+import TypingQuiz from './TypingQuiz';
 
 function App() {
   const [adjective, setAdjective] = useState('schön');
@@ -27,6 +28,7 @@ function App() {
           <Quiz />
           <AdjectiveDeclensionQuiz adjective={adjective} />
           <MedicalTextQuiz />
+          <TypingQuiz />
           </section>
       </main>
     </div>
