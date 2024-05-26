@@ -4,11 +4,12 @@ import { getRandomElement, handleInputChange, checkAnswers } from './quiz/utils'
 
 const generateQuizTable = () => {
   const quiz = getRandomElement(medicalTexts);
+  const correctEndings = [...quiz.correctEndings]; // Make a copy of the correctEndings array
   const words = quiz.text.split(/(___)/).filter(Boolean); // Split text into words and blanks
   const table = words.map((word, index) => ({
     text: word,
     userInput: '',
-    correct: word === '___' ? quiz.correctEndings.shift() : null,
+    correct: word === '___' ? correctEndings.shift() : null,
     isCorrect: null,
     isChecked: false
   }));
@@ -20,18 +21,27 @@ const MedicalTextQuiz = () => {
   const [result, setResult] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [showHints, setShowHints] = useState(false);
+  const [hintCount, setHintCount] = useState(0);
 
   const startQuiz = () => {
     setQuizTable(generateQuizTable());
     setResult(null);
     setShowResults(false); // Reset results visibility
     setShowHints(false); // Reset hints visibility
+    setHintCount(0); // Reset hint count
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const updatedTable = checkAnswers(quizTable, setResult, setShowResults);
     setQuizTable(updatedTable);
+  };
+
+  const handleShowHints = () => {
+    if (!showHints && hintCount < 3) {
+      setHintCount(hintCount + 1);
+    }
+    setShowHints(!showHints);
   };
 
   return (
@@ -48,7 +58,7 @@ const MedicalTextQuiz = () => {
                     type="text"
                     value={item.userInput}
                     onChange={(e) => handleInputChange(index, e.target.value, setQuizTable, quizTable)}
-                    placeholder={showHints ? item.correct : ''}
+                    placeholder={showHints && hintCount <= 3 ? item.correct : ''}
                     style={{
                       width: '20px',
                       color: item.userInput === '' ? 'grey' : (
@@ -78,7 +88,7 @@ const MedicalTextQuiz = () => {
         <div style={{ display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center' }}>
           <button onClick={handleSubmit}>Проверить ответы</button>
           <button onClick={startQuiz}>Следующий вопрос</button>
-          <button onClick={() => setShowHints(!showHints)}>
+          <button onClick={handleShowHints}>
             {showHints ? 'Скрыть подсказки' : 'Показать подсказки'}
           </button>
         </div>
