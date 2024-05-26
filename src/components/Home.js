@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import WeakDeclension from './WeakDeclension';
 import MixedDeclension from './MixedDeclension';
 import StrongDeclension from './StrongDeclension';
-import AdjectiveDeclensionQuiz from './AdjectiveDeclensionQuiz';
-import Carousel from './Carousel';
 import './styles.css';
 
 const Toggle = ({ label, isOpen, onToggle, children }) => {
