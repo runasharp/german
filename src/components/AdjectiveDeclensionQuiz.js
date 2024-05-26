@@ -51,7 +51,7 @@ const AdjectiveDeclensionQuiz = () => {
   };
 
   return (
-    <div>
+    <div className="adjective-declension-quiz">
       <button onClick={startQuiz}>Новый вопрос с табличкой склонений</button>
       {currentDeclension && currentAdjective && (
         <div>
@@ -95,20 +95,17 @@ const AdjectiveDeclensionQuiz = () => {
                           placeholder={showHints ? item.correct : ''}
                           style={{
                             width: '20px',
-                            color:
-                              item.userInput === ''
-                                ? 'grey'
-                                : showResults && item.isChecked
-                                ? item.isCorrect
-                                  ? 'green'
-                                  : 'red'
-                                : 'black',
+                            color: item.userInput === '' ? 'grey' : showResults && item.isChecked ? (item.isCorrect ? 'green' : 'red') : 'black',
                             border: 'none',
                             borderBottom: '1px solid black',
-                            margin: '0',
+                            borderTop: 'none',
+                            borderLeft: 'none',
+                            borderRight: 'none',
+                            borderRadius: '0',
+                            margin: '0 2px',
                             padding: '0',
                             fontSize: 'inherit',
-                            outline: 'none',
+                            outline: 'none'
                           }}
                         />
                       </td>
@@ -118,14 +115,13 @@ const AdjectiveDeclensionQuiz = () => {
               ))}
             </tbody>
           </table>
-          <button
-            onClick={() => {
+          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+            <button onClick={() => {
               const updatedTable = checkAnswers(quizTable, setResult, setShowResults);
               setQuizTable(updatedTable);
-            }}
-          >
-            Проверить ответы
-          </button>
+            }}>Проверить ответы</button>
+            <button onClick={startQuiz}>Следующий вопрос</button>
+          </div>
           {result && <p>{result}</p>}
         </div>
       )}
