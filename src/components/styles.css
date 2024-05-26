@@ -1,3 +1,4 @@
+/* App.css */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
@@ -24,19 +25,15 @@ header h1 {
 
 .main-content {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px;
-  gap: 20px;
-}
-
-.left-panel,
-.right-panel {
-  flex: 1;
-  min-width: 300px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 80vh;
 }
 
 .toggle-container {
+  width: 100%;
+  max-width: 500px; /* Set a maximum width */
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
