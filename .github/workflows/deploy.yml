@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '20'
+        node-version: '14'
 
     - name: Install dependencies
       run: npm install
@@ -31,7 +31,7 @@ jobs:
 
     - name: Deploy to GitHub Pages
       env:
-        DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
       run: |
         git remote set-url origin https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com/runasharp/german.git
         npx gh-pages -d build
