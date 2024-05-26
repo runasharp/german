@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@mui/material';
 import { germanWords, adjectives } from './quiz/words';
 import { sentenceTemplates } from './quiz/templates';
 import { getRandomElement, getCorrectAnswer, getArticle } from './quiz/utils';
@@ -42,9 +41,9 @@ const Quiz = () => {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={generateQuestion}>
+      <button onClick={generateQuestion} style={buttonStyle}>
         Новый вопрос с печатью целого предложения
-      </Button>
+      </button>
       {currentWord.word && (
         <div>
           <h3>Заполните правильную форму прилагательного</h3>
@@ -56,22 +55,18 @@ const Quiz = () => {
               .replace(currentWord.isPlural ? 'noun_plural' : 'noun', `${currentWord.word} (${currentWord.gender}, ${currentWord.isPlural ? 'Pl.' : 'Sing.'})`)}
           </p>
           <form onSubmit={handleSubmit}>
-            <TextField
+            <br />
+            <input
               type="text"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               placeholder="Ваш ответ"
-              variant="outlined"
-              fullWidth
-              margin="normal"
+              style={inputStyle}
             />
-            <Button
-              variant="contained"
-              color="secondary"
-              type="submit"
-            >
+            <br />
+            <button type="submit" style={buttonStyle}>
               Проверить ответ
-            </Button>
+            </button>
           </form>
           {result !== null && (
             <p>
@@ -84,6 +79,27 @@ const Quiz = () => {
       )}
     </div>
   );
+};
+
+const buttonStyle = {
+  margin: '10px',
+  padding: '10px 20px',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  fontSize: '16px',
+  transition: 'background-color 0.3s ease, transform 0.2s ease',
+};
+
+const inputStyle = {
+  width: '600px', // Adjust width as needed
+  height: '30px', // Adjust height as needed
+  fontSize: '16px', // Optionally adjust font size
+  padding: '10px', // Optionally adjust padding
+  margin: '10px', // Optionally adjust margin
+  border: '1px solid #ccc', // Optionally adjust border style
+  borderRadius: '4px', // Optionally adjust border radius
+  outline: 'none',
 };
 
 export default Quiz;
