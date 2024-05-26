@@ -79,7 +79,7 @@ button:hover {
 input {
   color: #121212; /* Dark text color */
   background-color: #f5f5f5; /* Light grey background */
-  border: 1px solid #90caf9; /* Light blue border */
+  border: 1px solid #ffffff; /* Light blue border */
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
@@ -95,7 +95,7 @@ input {
   width: 600px;
   height: 30px;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0; /* Remove left and right margins */
   border: 1px solid #90caf9; /* Light blue border */
   border-radius: 4px;
   background-color: #f5f5f5; /* Light grey background */
@@ -110,6 +110,7 @@ input {
   padding: 0;
   list-style-type: none;
   border: 1px solid #90caf9; /* Light blue border */
+  width: 100%;
 }
 
 .typing-quiz .sentence-overview li {
@@ -121,4 +122,32 @@ input {
 
 .typing-quiz .sentence-overview li:hover {
   background-color: #e0e0e0; /* Slightly darker grey on hover */
+}
+
+/* Specific styling for MedicalTextQuiz input fields */
+.medical-text-quiz input[type="text"] {
+  border: none;
+  border-bottom: 1px solid black;
+  border-top: none; /* Remove top border */
+  border-left: none; /* Remove left border */
+  border-right: none; /* Remove right border */
+  border-radius: 0; /* Remove border radius */
+  margin: 0 2px;
+  padding: 0;
+  width: 40px; /* Adjust width as needed */
+  font-size: inherit;
+  outline: none;
+  color: grey;
+}
+
+.medical-text-quiz input[type="text"]:not(:placeholder-shown) {
+  color: black;
+}
+
+.medical-text-quiz input[type="text"].correct {
+  color: green;
+}
+
+.medical-text-quiz input[type="text"].incorrect {
+  color: red;
 }
