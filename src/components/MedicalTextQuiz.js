@@ -35,7 +35,7 @@ const MedicalTextQuiz = () => {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
       <button onClick={startQuiz}>Новый вопрос с медицинскими предложениями</button>
       <div>
         <h3>Заполните пропущенные окончания в medizinischen текстах</h3>
@@ -61,7 +61,11 @@ const MedicalTextQuiz = () => {
                       margin: '0 2px',
                       padding: '0',
                       fontSize: 'inherit',
-                      outline: 'none'
+                      outline: 'none',
+                      borderTop: 'none', // Remove top border
+                      borderLeft: 'none', // Remove left border
+                      borderRight: 'none', // Remove right border
+                      borderRadius: '0', // Remove border radius
                     }}
                   />
                 </>
@@ -71,7 +75,7 @@ const MedicalTextQuiz = () => {
             </span>
           ))}
         </div>
-        <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center' }}>
           <button onClick={handleSubmit}>Проверить ответы</button>
           <button onClick={startQuiz}>Следующий вопрос</button>
           <button onClick={() => setShowHints(!showHints)}>
