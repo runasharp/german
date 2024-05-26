@@ -31,7 +31,7 @@ jobs:
 
     - name: Deploy to GitHub Pages
       env:
-        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
       run: |
         git remote set-url origin https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com/runasharp/german.git
         npx gh-pages -d build
