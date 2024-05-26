@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './TypingQuiz.css';
 
 const TypingQuiz = () => {
   const [userInput, setUserInput] = useState('');
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
+  const inputRef = useRef(null);
 
   const sentences = [
     "Herr Dr. Mustermann Musterkrankenhaus",
-    "Musterstraße X Musterstraße X, XXXXX Musterstadt",
-    "Potsdam, 17. Juni 2024",
+    "Musterstraße X Musterstraße X, XXXXX Musterstadt XXXXX Musterstadt",
+    "Prüfungsort, XX. Monat Jahr",
     "Sehr geehrter Herr Dr. Mustermann,",
     "wir berichten Ihnen über Frau Muster Musterfrau, geboren am XX. Monat Jahr, wohnhaft in der Musterstraße X, XXXXX Musterstadt, die sich vom XX.XX. bis zum XX.XX.XXXX in unserer stationären Behandlung befand.",
     "Diagnosen:",
@@ -58,6 +59,10 @@ const TypingQuiz = () => {
     "Chefarzt Oberärztin Prüfling",
   ];
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   const handleChange = (event) => {
     const value = event.target.value;
     setUserInput(value);
@@ -68,17 +73,29 @@ const TypingQuiz = () => {
     }
   };
 
+  const handleSentenceChange = (index) => {
+    setCurrentSentenceIndex(index);
+    setUserInput(''); // Reset user input when changing sentences
+  };
+  
+
   const getStyledText = () => {
-    const currentSentence = sentences[currentSentenceIndex];
-    return currentSentence.split('').map((char, index) => {
-      let color;
+    const sentence = sentences[currentSentenceIndex];
+    const splitSentence = sentence.split('');
+  
+    return splitSentence.map((char, index) => {
+      let style = {};
       if (index < userInput.length) {
-        color = char === userInput[index] ? 'black' : 'red';
+        style.color = userInput[index] === char ? 'black' : 'red';
+      } else if (index === userInput.length) {
+        style.backgroundColor = 'blue';
+        style.color = 'white'; // Ensure the text color is readable against the blue background
       } else {
-        color = 'rgba(0, 0, 0, 0.3)'; // faded text color
+        style.color = 'grey';
       }
+  
       return (
-        <span key={index} style={{ color }}>
+        <span key={index} style={style}>
           {char}
         </span>
       );
@@ -86,16 +103,36 @@ const TypingQuiz = () => {
   };
 
   return (
-    <div className="typing-quiz">
-      <h3>Typing Quiz</h3>
+    <div className="typing-quiz" onClick={() => inputRef.current.focus()}>
+              <div>
+        <h2>Sentence Overview</h2>
+        <ul style={{ maxHeight: '100px', overflowY: 'scroll', padding: '0', listStyleType: 'none', border: '1px solid #ccc' }}>
+          {sentences.map((sentence, index) => (
+            <li
+              key={index}
+              onClick={() => handleSentenceChange(index)}
+              style={{
+                cursor: 'pointer',
+                padding: '5px',
+                backgroundColor: currentSentenceIndex === index ? 'lightblue' : 'white',
+                color: currentSentenceIndex === index ? 'blue' : 'black'
+              }}
+            >
+              {sentence}
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="text-container">{getStyledText()}</div>
       <input
+        ref={inputRef}
         type="text"
         value={userInput}
         onChange={handleChange}
-        className="typing-input"
-        placeholder="Start typing here..."
+        className="hidden-input"
+        autoFocus
       />
+
     </div>
   );
 };

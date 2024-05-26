@@ -2,18 +2,25 @@
     text-align: center;
     margin: 20px;
     font-family: Arial, sans-serif;
+    cursor: text; /* Ensures the cursor indicates the area is clickable for text input */
   }
   
   .text-container {
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin-bottom: 20px;
     white-space: pre-wrap;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 60px; /* Ensures there's a consistent height for the text container */
   }
   
-  .typing-input {
-    width: 80%;
-    padding: 10px;
-    font-size: 1.2em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  .hidden-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
   }
