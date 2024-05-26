@@ -45,10 +45,6 @@ export const medicalTexts = [
     correctEndings: ["e"]
   },
   {
-    text: "Die arteriell___ Blutdruckmessung zeigte eine stabil___ Blutdrucklage.",
-    correctEndings: ["e"]
-  },
-  {
     text: "Die Untersuchung des rechten Schultergelenks zeigte eine deutlich___ Schwellung.",
     correctEndings: ["e"]
   },
@@ -70,10 +66,6 @@ export const medicalTexts = [
   },
   {
     text: "Der Patient erhielt eine schulterimmobilisierend___ Orthese für 2 Wochen.",
-    correctEndings: ["e"]
-  },
-  {
-    text: "Mit einer Empfehlung für eine ambulant___ Physiotherapie wurde der Patient entlassen, um die vollständige Genesung sicherzustellen___.",
     correctEndings: ["e"]
   },
   {
