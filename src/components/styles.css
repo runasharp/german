@@ -1,28 +1,145 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+}
+
+.left-panel,
+.right-panel {
+  flex: 1;
+  min-width: 300px;
+}
+
 .toggle-container {
-    margin-bottom: 10px;
-  }
-  
-  .toggle-header {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .toggle-icon {
-    transition: transform 0.2s;
-    margin-right: 5px;
-    color: black;
-  }
-  
-  .toggle-icon.open {
-    transform: rotate(90deg);
-  }
-  
-  .toggle-label {
-    font-weight: bold;
-  }
-  
-  .toggle-content {
-    padding-left: 20px;
-    margin-top: 5px;
-  }
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.toggle-icon {
+  transition: transform 0.2s;
+  margin-right: 10px;
+}
+
+.toggle-icon.open {
+  transform: rotate(90deg);
+}
+
+.toggle-label {
+  font-weight: bold;
+}
+
+.toggle-content {
+  padding: 10px 20px;
+  margin-top: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+span {
+  color: red;
+}
+
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Typing quiz specific styles */
+.typing-quiz {
+  text-align: left;
+}
+
+.text-container {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hidden-input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+}
+
+.sentence-overview {
+  max-height: 100px;
+  overflow-y: auto;
+  padding: 0;
+  list-style-type: none;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.sentence-overview li {
+  cursor: pointer;
+  padding: 5px;
+  background-color: white;
+}
+
+.sentence-overview li:hover {
+  background-color: #f0f0f0;
+}
+
+.sentence-overview li.active {
+  background-color: lightblue;
+  color: blue;
+}

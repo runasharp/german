@@ -45,8 +45,13 @@ const Carousel = () => {
   };
 
   return (
-    <div>
+    <div>      
+      <div>
+        <button onClick={prevExplanation}>Предыдущий</button>
+        <button onClick={nextExplanation}>Следующий</button>
+      </div>
       <p>{text}</p>
+      
       <HighlightTable
         adjective="schön"
         highlightEnding={highlightEnding}
@@ -54,10 +59,7 @@ const Carousel = () => {
         selectedCase={selectedCase}
         selectedGender={selectedGender}
       />
-      <div>
-        <button onClick={prevExplanation}>Предыдущий</button>
-        <button onClick={nextExplanation}>Следующий</button>
-      </div>
+
     </div>
   );
 };

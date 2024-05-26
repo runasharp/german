@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, TextField } from '@mui/material';
 import { germanWords, adjectives } from './quiz/words';
 import { sentenceTemplates } from './quiz/templates';
 import { getRandomElement, getCorrectAnswer, handleInputChange, getArticle } from './quiz/utils';
@@ -41,49 +42,43 @@ const Quiz = () => {
 
   return (
     <div>
-      <button onClick={generateQuestion}>Новый вопрос с печатью целого предложения</button>
+      <Button variant="contained" color="primary" onClick={generateQuestion}>
+        Новый вопрос с печатью целого предложения
+      </Button>
       {currentWord.word && (
         <div>
           <h3>Заполните правильную форму прилагательного</h3>
-          <p>({currentWord.case}, {currentWord.declension}): {currentWord.template.replace('(adjective ending)', `... (${currentAdjective})`).replace('article', getArticle(currentWord, currentWord.case, currentWord.declension, currentWord.isPlural)).replace(currentWord.isPlural ? 'noun_plural' : 'noun', `${currentWord.word} (${currentWord.gender}, ${currentWord.isPlural ? 'Pl.' : 'Sing.'})`)}</p>
+          <p>
+            ({currentWord.case}, {currentWord.declension}):{' '}
+            {currentWord.template
+              .replace('(adjective ending)', `... (${currentAdjective})`)
+              .replace('article', getArticle(currentWord, currentWord.case, currentWord.declension, currentWord.isPlural))
+              .replace(currentWord.isPlural ? 'noun_plural' : 'noun', `${currentWord.word} (${currentWord.gender}, ${currentWord.isPlural ? 'Pl.' : 'Sing.'})`)}
+          </p>
           <form onSubmit={handleSubmit}>
-            <br />
-            <input
+            <TextField
               type="text"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               placeholder="Ваш ответ"
-              style={{
-                width: '600px', // Adjust width as needed
-                height: '30px', // Adjust height as needed
-                fontSize: '16px', // Optionally adjust font size
-                padding: '10px', // Optionally adjust padding
-                margin: '10px', // Optionally adjust margin
-                border: '1px solid #ccc', // Optionally adjust border style
-                borderRadius: '4px', // Optionally adjust border radius
-              }}
+              variant="outlined"
+              fullWidth
+              margin="normal"
             />
-            <br />
-            <button
+            <Button
+              variant="contained"
+              color="secondary"
               type="submit"
-              style={{
-                width: '200px', // Adjust width as needed
-                height: '50px', // Adjust height as needed
-                fontSize: '18px', // Optionally adjust font size
-                padding: '10px', // Optionally adjust padding
-                margin: '10px', // Optionally adjust margin
-                border: 'none', // Optionally remove border
-                borderRadius: '6px', // Optionally adjust border radius
-                backgroundColor: '#3498db', // Optionally adjust background color
-                color: '#fff', // Optionally adjust text color
-                cursor: 'pointer', // Optionally change cursor on hover
-              }}
             >
               Проверить ответ
-            </button>
+            </Button>
           </form>
           {result !== null && (
-            <p>{result ? 'Правильно!' : `Неправильно. Правильный ответ: ${getCorrectAnswer(currentWord, currentAdjective)}`}</p>
+            <p>
+              {result
+                ? 'Правильно!'
+                : `Неправильно. Правильный ответ: ${getCorrectAnswer(currentWord, currentAdjective)}`}
+            </p>
           )}
         </div>
       )}

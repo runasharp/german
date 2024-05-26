@@ -60,10 +60,6 @@ const Home = () => {
           <StrongDeclension adjective={adjective} />
         </Toggle>
       </section>
-      <section>
-        <h2>Объяснение склонений прилагательных</h2>
-        <Carousel />
-      </section>
     </div>
   );
 };

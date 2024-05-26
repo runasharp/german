@@ -50,7 +50,7 @@ const TypingQuiz = () => {
     "Wir leiteten eine diuretische Therapie mit Furosemid intravenös ein.",
     "Darunter kam es zu einer Besserung der Symptomatik.",
     "Die Patientin wurde dauerhaft auf Torasemid 20 mg oral eingestellt.",
-    "Wir entließen die Patientin in lhre ambulante Betreuung und bitten um regelmäßige Kontrollen des Blutdrucks und der Laborwerte.",
+    "Wir entließen die Patientin in Ihre ambulante Betreuung und bitten um regelmäßige Kontrollen des Blutdrucks und der Laborwerte.",
     "Stand: April 2024",
     "Medikation bei Entlassung:",
     "Torasemid 20 mg 1-0-0 und",
@@ -77,12 +77,11 @@ const TypingQuiz = () => {
     setCurrentSentenceIndex(index);
     setUserInput(''); // Reset user input when changing sentences
   };
-  
 
   const getStyledText = () => {
     const sentence = sentences[currentSentenceIndex];
     const splitSentence = sentence.split('');
-  
+
     return splitSentence.map((char, index) => {
       let style = {};
       if (index < userInput.length) {
@@ -93,7 +92,7 @@ const TypingQuiz = () => {
       } else {
         style.color = 'grey';
       }
-  
+
       return (
         <span key={index} style={style}>
           {char}
@@ -104,8 +103,8 @@ const TypingQuiz = () => {
 
   return (
     <div className="typing-quiz" onClick={() => inputRef.current.focus()}>
-              <div>
-        <h2>Sentence Overview</h2>
+      <div>
+        <h2>Выбрать предложение:</h2>
         <ul style={{ maxHeight: '100px', overflowY: 'scroll', padding: '0', listStyleType: 'none', border: '1px solid #ccc' }}>
           {sentences.map((sentence, index) => (
             <li
@@ -132,7 +131,6 @@ const TypingQuiz = () => {
         className="hidden-input"
         autoFocus
       />
-
     </div>
   );
 };
