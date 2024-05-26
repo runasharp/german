@@ -30,6 +30,8 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
     - name: Deploy to GitHub Pages
-      run: npm run deploy
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com/runasharp/german.git
+        npx gh-pages -d build
