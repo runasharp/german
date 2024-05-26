@@ -30,4 +30,4 @@ jobs:
           branch: gh-pages
           folder: build
           clean: true
-          token: ${{ secrets.DEPLOY_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
