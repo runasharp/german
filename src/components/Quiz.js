@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { germanWords, adjectives } from './quiz/words';
 import { sentenceTemplates } from './quiz/templates';
-import { getRandomElement, getCorrectAnswer, handleInputChange, getArticle } from './quiz/utils';
+import { getRandomElement, getCorrectAnswer, getArticle } from './quiz/utils';
 
 const cases = ['Nominativ', 'Akkusativ', 'Dativ', 'Genitiv'];
 const declensions = ['слабое скл.', 'смешанное скл.', 'сильное скл.'];
