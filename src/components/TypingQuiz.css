@@ -1,26 +1,28 @@
 .typing-quiz {
-    text-align: center;
-    margin: 20px;
-    font-family: Arial, sans-serif;
-    cursor: text; /* Ensures the cursor indicates the area is clickable for text input */
-  }
-  
-  .text-container {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    white-space: pre-wrap;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 60px; /* Ensures there's a consistent height for the text container */
-  }
-  
-  .hidden-input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
+  /* text-align: center; */
+  /* margin: 20px; */
+  font-family: Arial, sans-serif;
+  cursor: text; /* Ensures the cursor indicates the area is clickable for text input */
+}
+
+.text-container {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  white-space: pre-wrap;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 60px; /* Ensures there's a consistent height for the text container */
+}
+
+.hidden-input {
+  opacity: 0;
+  pointer-events: none;
+  width: 90%; /* ✅ Prevents it from being too wide */
+  max-width: 600px; /* ✅ Limits width on large screens */
+  margin: 0 auto;
+}

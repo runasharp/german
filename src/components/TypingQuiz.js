@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import './TypingQuiz.css';
+import React, { useState, useRef, useEffect } from "react";
+import "./TypingQuiz.css";
 
 const TypingQuiz = () => {
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const inputRef = useRef(null);
 
@@ -68,29 +68,31 @@ const TypingQuiz = () => {
     setUserInput(value);
 
     if (value === sentences[currentSentenceIndex]) {
-      setUserInput('');
-      setCurrentSentenceIndex((prevIndex) => (prevIndex + 1) % sentences.length);
+      setUserInput("");
+      setCurrentSentenceIndex(
+        (prevIndex) => (prevIndex + 1) % sentences.length
+      );
     }
   };
 
   const handleSentenceChange = (index) => {
     setCurrentSentenceIndex(index);
-    setUserInput(''); // Reset user input when changing sentences
+    setUserInput(""); // Reset user input when changing sentences
   };
 
   const getStyledText = () => {
     const sentence = sentences[currentSentenceIndex];
-    const splitSentence = sentence.split('');
+    const splitSentence = sentence.split("");
 
     return splitSentence.map((char, index) => {
       let style = {};
       if (index < userInput.length) {
-        style.color = userInput[index] === char ? 'black' : 'red';
+        style.color = userInput[index] === char ? "black" : "red";
       } else if (index === userInput.length) {
-        style.backgroundColor = 'blue';
-        style.color = 'white'; // Ensure the text color is readable against the blue background
+        style.backgroundColor = "blue";
+        style.color = "white"; // Ensure the text color is readable against the blue background
       } else {
-        style.color = 'grey';
+        style.color = "grey";
       }
 
       return (
@@ -101,6 +103,7 @@ const TypingQuiz = () => {
     });
   };
 
+<<<<<<< HEAD
 return (
   <div className="typing-quiz" onClick={() => inputRef.current.focus()}>
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -124,6 +127,67 @@ return (
         </ul>
       </div>
       <div className="text-container" style={{ width: '100%' }}>{getStyledText()}</div>
+=======
+  return (
+    <div className="typing-quiz" onClick={() => inputRef.current.focus()}>
+      <div
+        style={{
+          maxWidth: "100%",
+          margin: "0 auto",
+          overflowX: "hidden", // Prevent horizontal scrolling
+        }}
+      >
+        <h2>Выбрать предложение:</h2>
+        <div
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
+          <ul
+            style={{
+              maxHeight: "100px",
+              overflowY: "scroll",
+              padding: "0",
+              listStyleType: "none",
+              border: "1px solid #ccc",
+              width: "90%", // ✅ Use percentage to prevent overflow
+              maxWidth: "600px", // ✅ Prevent it from getting too large
+            }}
+          >
+            {sentences.map((sentence, index) => (
+              <li
+                key={index}
+                onClick={() => handleSentenceChange(index)}
+                style={{
+                  cursor: "pointer",
+                  padding: "5px",
+                  backgroundColor:
+                    currentSentenceIndex === index ? "lightblue" : "white",
+                  color: currentSentenceIndex === index ? "blue" : "black",
+                  wordBreak: "break-word", // ✅ Ensure long words wrap
+                }}
+              >
+                {sentence}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="text-container" style={{ width: "100%" }}>
+          {getStyledText()}
+        </div>
+      </div>
+      <input
+        ref={inputRef}
+        type="text"
+        value={userInput}
+        onChange={handleChange}
+        className="hidden-input"
+        autoFocus
+        style={{
+          width: "90%", // ✅ Use percentage to prevent overflowing
+          maxWidth: "600px", // ✅ Restrict max width
+          margin: "0 auto",
+        }}
+      />
+>>>>>>> 0b2d293 (Fixed layout issues and improved responsiveness)
     </div>
     <input
       ref={inputRef}

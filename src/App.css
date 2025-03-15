@@ -12,6 +12,7 @@ body {
   text-align: center;
 }
 
+<<<<<<< HEAD
 /* Header styles */
 .header {
   background-color: #1c3040;
@@ -23,13 +24,29 @@ body {
 
 /* Navigation bar */
 .header nav {
+=======
+/* General header styling */
+header {
+  background-color: #1c3040;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Navigation container */
+header nav {
+>>>>>>> 0b2d293 (Fixed layout issues and improved responsiveness)
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
+<<<<<<< HEAD
 /* Navigation links */
+=======
+/* Default Navigation (Desktop) */
+>>>>>>> 0b2d293 (Fixed layout issues and improved responsiveness)
 .nav-links {
   display: flex;
   justify-content: space-evenly; /* Distribute links evenly */
@@ -54,6 +71,7 @@ body {
 }
 
 .nav-links a:hover {
+<<<<<<< HEAD
   color: hsl(208, 72%, 80%); /* Light blue on hover */
 }
 
@@ -74,11 +92,37 @@ body {
 /* ✅ Mobile View Adjustments */
 @media (max-width: 768px) {
   /* Show menu button */
+=======
+  color: hsl(208, 72%, 80%);
+}
+
+/* Menu toggle button (Fix: Now Visible!) */
+.menu-toggle {
+  display: none; /* Default: hidden on desktop */
+  background: none;
+  border: none;
+  font-size: 28px; /* Increased size for visibility */
+  color: #ffffff; /* Ensures button is visible */
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px; /* Position it to the right */
+  z-index: 2000; /* Ensure it's on top */
+}
+
+/* Responsive: Mobile & Tablet View */
+@media (max-width: 768px) {
+  /* Show menu toggle button on mobile */
+>>>>>>> 0b2d293 (Fixed layout issues and improved responsiveness)
   .menu-toggle {
     display: block;
   }
 
+<<<<<<< HEAD
   /* Hide menu by default */
+=======
+  /* Hide menu initially */
+>>>>>>> 0b2d293 (Fixed layout issues and improved responsiveness)
   .nav-links {
     display: none;
     flex-direction: column;
@@ -93,7 +137,11 @@ body {
     transition: all 0.3s ease-in-out;
   }
 
+<<<<<<< HEAD
   /* Show menu when active */
+=======
+  /* Show menu when open */
+>>>>>>> 0b2d293 (Fixed layout issues and improved responsiveness)
   .nav-links.open {
     display: flex;
   }
